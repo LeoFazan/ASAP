@@ -1,7 +1,7 @@
   
 #include <Keyboard.h> //Incluindo a biblioteca de comandos do teclado
 #include <Mouse.h> //Incluindo a biblioteca de comandos do mouse
-#include <Arduino.h>
+#include <Arduino.h> //Incluindo a biblioteca do Arduino (necessário pro plataform.io)
 
 //teste de versão 
  
