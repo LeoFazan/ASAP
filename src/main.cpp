@@ -1,12 +1,7 @@
 
 #include <Keyboard.h> //Incluindo a biblioteca de comandos do teclado
-<<<<<<< HEAD
 #include <Mouse.h>    //Incluindo a biblioteca de comandos do mouse
 #include <Arduino.h>
-=======
-#include <Mouse.h> //Incluindo a biblioteca de comandos do mouse
-#include <Arduino.h> //Incluindo a biblioteca do Arduino (necessário pro plataform.io)
->>>>>>> a99be9f8b2410b45e0abac013a523951c864d7c8
 
 int horzPin = A3;  // Output do módulo horizontal do joystick 2
 int vertPin = A2;  // Output do módulo vertical do joystick 2
@@ -21,21 +16,16 @@ int vertValueassist, horzValueassist, vertValue2assist, horzValue2assist; // Dec
 int mouseClickFlag = 0;                                                   // Auxilia no processo de clique no botão(talvez não seja usado)
 int mouseClickFlag2 = 0;
 
-const int sensitivity = 400; // Quantomaior o valor = mais lento o mouse (em torno de 250)
+int sensitivity = 250; // Quantomaior o valor = mais lento o mouse (em torno de 250)
 int invertMouse = -1;        // Inversor de orientação do joystick, -1 para não inverter, 1 para inverter
 
-// Declarando as matrizes de controle
-char mouse_joystick2[3][3]{// Matriz de teclado (teste - não usada)
-                           {'\0', 'a', 'b'},
-                           {'c', 'e', 'f'},
-                           {'g', 'h', 'k'}};
 
 // Declaração dos comandos da matriz de controle do mouse
 
-const char *mouse_com[3][3]{// Matriz de controle do mouse
-                            {"\0", "MOUSE_MIDDLE", "\0"},
-                            {"MOUSE_LEFT", "\0", "\0"},
-                            {"MOUSE_RIGHT", "\0", "\0"}};
+const char* mouse_com[3][3]={// Matriz de controle do mouse
+                            {NULL, "MOUSE_MIDDLE", NULL},
+                            {"MOUSE_LEFT", NULL, NULL},
+                            {"MOUSE_RIGHT", NULL, NULL}};
 
 void setup()
 {                                 // Inicialização dos pinos e variáveis
@@ -90,7 +80,7 @@ void joystick1()
 void joystick2()
 {
 
-  {                                                // Traduz o valor de 420 a 530 a simplesmente 400, elimina o ruído da leitura analógica
+  {
     vertValue2 = analogRead(vertPin2) - vertZero2; // Lê o deslocamento vertical
     horzValue2 = analogRead(horzPin2) - horzZero2; // Lê o deslocamento horizontal
 
@@ -124,34 +114,4 @@ void loop()
   joystick2();
 }
 
-/*
 
-
-Keyboard.write(mouse_joystick2[horzValue2][vertValue2]); //imprime aqui o que está na tabela mouse_joystick2
-if (mouse_joystick2[horzValue2][vertValue2] != '\0') //garante que haverá navegação sem atraso do joystick que controle o mouse enquanto não houver nada sendo aplicado no joystick comando
- delay(200); //delay do joystick comando
-*/
-
-/*
-
-#include <Keyboard.h>
-int buttonPin = 9;  // Set a button to any pin
-
-void setup()
-{
-  pinMode(buttonPin, INPUT);  // Set the button as an input
-  digitalWrite(buttonPin, HIGH);  // Pull the button high
-
-  Keyboard.begin(); //Init keyboard emulation
-}
-
-void loop()
-{
-  if (digitalRead(buttonPin) == 0)  // if the button goes low
-  {
-    Keyboard.write('z');  // send a 'z' to the computer via Keyboard HID
-    delay(1000);  // delay so there aren't a kajillion z's
-  }
-}
-
-*/
