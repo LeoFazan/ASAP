@@ -1,13 +1,22 @@
-
 #include <Keyboard.h> //Incluindo a biblioteca de comandos do teclado
 #include <Mouse.h>    //Incluindo a biblioteca de comandos do mouse
 #include <Arduino.h>
 
-int horzPin = A3;  // Output do módulo horizontal do joystick 2
-int vertPin = A2;  // Output do módulo vertical do joystick 2
+#define MC00 0
+#define MC01 MOUSE_MIDDLE
+#define MC02 0
+#define MC10 MOUSE_LEFT
+#define MC11 0
+#define MC12 0
+#define MC20 MOUSE_RIGHT
+#define MC21 0
+#define MC22 0
+
+int horzPin = A2;  // Output do módulo horizontal do joystick 2
+int vertPin = A3;  // Output do módulo vertical do joystick 2
 int selPin = 8;    // Botão do joystick 2 (talvez não usado)
-int horzPin2 = A0; // Output do módulo horizontal do joystick 1
-int vertPin2 = A1; // Output do módulo vertical do joystick 1
+int horzPin2 = A1; // Output do módulo horizontal do joystick 1
+int vertPin2 = A0; // Output do módulo vertical do joystick 1
 int selPin2 = 9;   // Botão do joystick 2 (talvez não usado)
 
 int vertZero, horzZero, vertZero2, horzZero2;                             // Armazena os valores iniciais de cada eixo (geralmente em torno de 512)
@@ -17,15 +26,14 @@ int mouseClickFlag = 0;                                                   // Aux
 int mouseClickFlag2 = 0;
 
 int sensitivity = 250; // Quantomaior o valor = mais lento o mouse (em torno de 250)
-int invertMouse = -1;        // Inversor de orientação do joystick, -1 para não inverter, 1 para inverter
+int invertMouse = -1;  // Inversor de orientação do joystick, -1 para não inverter, 1 para inverter
 
+// Declaração doscomandos da matriz de controle do mouse
 
-// Declaração dos comandos da matriz de controle do mouse
-
-const int mouse_com[3][3]={// Matriz de controle do mouse
-                            {0, MOUSE_MIDDLE, 0},
-                            {MOUSE_LEFT, 0, 0},
-                            {MOUSE_RIGHT, 0, 0}};
+const int mouse_com[3][3] = { // Matriz de controle do mouse
+    {MC00, MC01, MC02},
+    {MC10, MC11, MC12},
+    {MC20, MC21, MC22}};
 
 void setup()
 {                                 // Inicialização dos pinos e variáveis
@@ -98,7 +106,7 @@ void joystick2()
     if (horzValue2 == -400)
       horzValue2 = 2;
   }
-  if (mouse_com[horzValue2][vertValue2] != 0)      // Manda os comandos do mouse
+  if (mouse_com[horzValue2][vertValue2] != 0)         // Manda os comandos do mouse
   {                                                   // Garante que haverá navegação sem atraso do joystick que controle o mouse enquanto não houver nada sendo aplicado no joystick comando
     Mouse.press(mouse_com[horzValue2][vertValue2]);   // Pressiona o comando desejado armazenado em aux
     delay(200);                                       // Delay para evitar que haja uma repetição excessiva do comando
@@ -109,9 +117,6 @@ void joystick2()
 
 void loop()
 {
-
   joystick1();
   joystick2();
 }
-
-
