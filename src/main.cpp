@@ -1,7 +1,12 @@
 
 #include <Keyboard.h> //Incluindo a biblioteca de comandos do teclado
+<<<<<<< HEAD
 #include <Mouse.h>    //Incluindo a biblioteca de comandos do mouse
 #include <Arduino.h>
+=======
+#include <Mouse.h> //Incluindo a biblioteca de comandos do mouse
+#include <Arduino.h> //Incluindo a biblioteca do Arduino (necessário pro plataform.io)
+>>>>>>> a99be9f8b2410b45e0abac013a523951c864d7c8
 
 int horzPin = A3;  // Output do módulo horizontal do joystick 2
 int vertPin = A2;  // Output do módulo vertical do joystick 2
