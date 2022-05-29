@@ -22,10 +22,10 @@ int invertMouse = -1;        // Inversor de orientação do joystick, -1 para n�
 
 // Declaração dos comandos da matriz de controle do mouse
 
-const char* mouse_com[3][3]={// Matriz de controle do mouse
-                            {NULL, "MOUSE_MIDDLE", NULL},
-                            {"MOUSE_LEFT", NULL, NULL},
-                            {"MOUSE_RIGHT", NULL, NULL}};
+const int mouse_com[3][3]={// Matriz de controle do mouse
+                            {0, MOUSE_MIDDLE, 0},
+                            {MOUSE_LEFT, 0, 0},
+                            {MOUSE_RIGHT, 0, 0}};
 
 void setup()
 {                                 // Inicialização dos pinos e variáveis
@@ -98,7 +98,7 @@ void joystick2()
     if (horzValue2 == -400)
       horzValue2 = 2;
   }
-  if (mouse_com[horzValue2][vertValue2] != NULL)      // Manda os comandos do mouse
+  if (mouse_com[horzValue2][vertValue2] != 0)      // Manda os comandos do mouse
   {                                                   // Garante que haverá navegação sem atraso do joystick que controle o mouse enquanto não houver nada sendo aplicado no joystick comando
     Mouse.press(mouse_com[horzValue2][vertValue2]);   // Pressiona o comando desejado armazenado em aux
     delay(200);                                       // Delay para evitar que haja uma repetição excessiva do comando
