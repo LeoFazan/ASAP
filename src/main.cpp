@@ -12,6 +12,8 @@
 #define MC21 0
 #define MC22 0
 
+const int buzzer = 4;
+
 int horzPin = A2;  // Output do módulo horizontal do joystick 2
 int vertPin = A3;  // Output do módulo vertical do joystick 2
 int selPin = 8;    // Botão do joystick 2 (talvez não usado)
@@ -55,6 +57,16 @@ void setup()
 
   Mouse.begin();    // Inicia a simulação do mouse
   Keyboard.begin(); // Inicia a simulação do teclado
+
+
+  delay(3000); //delay inicial pra evitar acidentes durante o desenvolvimento
+}
+
+void sound()
+{
+    tone(buzzer, 4000);
+    delay(40);
+    noTone(buzzer);
 }
 
 void joystick1()
@@ -110,8 +122,13 @@ void joystick2()
   {                                                   // Garante que haverá navegação sem atraso do joystick que controle o mouse enquanto não houver nada sendo aplicado no joystick comando
     Mouse.press(mouse_com[horzValue2][vertValue2]);   // Pressiona o comando desejado armazenado em aux
     delay(200);                                       // Delay para evitar que haja uma repetição excessiva do comando
-    Mouse.release(mouse_com[horzValue2][vertValue2]); // Solta o comando (senão fica pressionado para sempre)
-    delay(200);                                       // Mais um delay para evitar cliques múltiplos acidentais
+    Mouse.release(mouse_com[horzValue2][vertValue2]);// Solta o comando (senão fica pressionado para sempre)
+    delay(200); // Mais um delay para evitar cliques múltiplos acidentais
+    sound(); 
+                                          
+
+
+   
   }
 }
 
